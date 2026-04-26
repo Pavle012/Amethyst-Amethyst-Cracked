@@ -1,17 +1,15 @@
-<h1 align="center">Angel Aura Amethyst</h1>
+<h1 align="center">Amethyst Cracked</h1>
 
-<img src="https://github.com/AngelAuraMC/Amethyst-Android/blob/v3_openjdk/app_pojavlauncher/src/main/assets/amethyst.png" align="left" width="130" height="130" alt="Amethyst logo">
+<img src="app_pojavlauncher/src/main/assets/amethyst.png" align="left" width="130" height="130" alt="Amethyst logo">
 
-[![Android CI](https://github.com/AngelAuraMC/Amethyst-Android/workflows/Android%20CI/badge.svg)](https://github.com/AngelAuraMC/Amethyst-Android/actions)
-[![GitHub commit activity](https://img.shields.io/github/commit-activity/m/AngelAuraMC/Amethyst-Android)](https://github.com/AngelAuraMC/Amethyst-Android/actions)
+[![Android CI](https://github.com/Pavle012/Amethyst-Amethyst-Cracked/workflows/Android%20CI/badge.svg)](https://github.com/Pavle012/Amethyst-Amethyst-Cracked/actions)
+[![GitHub commit activity](https://img.shields.io/github/commit-activity/m/Pavle012/Amethyst-Amethyst-Cracked)](https://github.com/Pavle012/Amethyst-Amethyst-Cracked/actions)
 [![Crowdin](https://badges.crowdin.net/pojavlauncher/localized.svg)](https://crowdin.com/project/pojavlauncher)
 [![Discord](https://img.shields.io/discord/724163890803638273.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2)](https://discord.gg/5ptqkyZxEy)
 
-*From [Boardwalk](https://github.com/zhuowei/Boardwalk)'s ashes and [PojavLauncher](https://github.com/PojavLauncherTeam/PojavLauncher)'s ruined reputation, here comes Amethyst!*
+*From [Boardwalk](https://github.com/zhuowei/Boardwalk)'s ashes and [PojavLauncher](https://github.com/PojavLauncherTeam/PojavLauncher)'s ruined reputation, here comes Amethyst Cracked!*
 
-Amethyst is a launcher that allows you to play Minecraft: Java Edition on your Android and [iOS](https://github.com/AngelAuraMC/Amethyst-iOS) devices.
-
-For more details, check out our [wiki](https://wiki.angelauramc.dev)!
+Amethyst Cracked is a fork of Amethyst that allows you to play Minecraft: Java Edition on your Android devices without requiring a paid Microsoft account (Offline/Cracked support).
 
 ## Table of Contents
 
@@ -31,16 +29,16 @@ For more details, check out our [wiki](https://wiki.angelauramc.dev)!
 
 ## Introduction
 
-* Amethyst is a Minecraft: Java Edition launcher for Android and iOS based on [Boardwalk](https://github.com/zhuowei/Boardwalk) and [PojavLauncher](https://github.com/PojavLauncherTeam/PojavLauncher)
+* Amethyst Cracked is a Minecraft: Java Edition launcher for Android based on [Amethyst](https://github.com/AngelAuraMC/Amethyst-Android)
+* Supports **Cracked/Offline accounts** out of the box without needing an online profile.
 * This launcher can launch almost all available Minecraft versions ranging from rd-132211 to 1.21 snapshots (including Combat Test versions)
 * Modding via Forge and Fabric are also supported.
-* This repository contains source code for Android. For iOS/iPadOS, check out [Amethyst-iOS](https://github.com/AngelAuraMC/Amethyst-iOS).
 
 ## Getting Amethyst
 
 You can get Amethyst via two methods:
 
-1. **Releases:** Download the latest prebuilt app from [nightly.link](https://nightly.link/AngelAuraMC/Amethyst-Android/workflows/android/v3_openjdk/app-debug%20%28recommended%29.zip) or select an older version from our [automatic builds](https://github.com/AngelAuraMC/Amethyst-Android/actions).
+1. **Releases:** Download the latest prebuilt app from select a version from our [automatic builds](https://github.com/Pavle012/Amethyst-Amethyst-Cracked/actions).
 2. **Build from Source:** Follow the [building instructions](#building) below.
 
 ## Building
@@ -49,7 +47,7 @@ You can get Amethyst via two methods:
 
 The easiest way to build Amethyst is to use the pre-built JREs provided by our CI.
 
-1. Clone the repository: `git clone --recursive https://github.com/AngelAuraMC/Amethyst-Android.git`
+1. Clone the repository: `git clone --recursive https://github.com/Pavle012/Amethyst-Amethyst-Cracked.git`
 2. Build the launcher: `./gradlew :app_pojavlauncher:assembleDebug` (Use `gradlew.bat` on Windows)
 
 The built APK will be located in `app_pojavlauncher/build/outputs/apk/debug/`.
@@ -96,7 +94,7 @@ If you need more control over the build process, follow these steps:
 
 ## Known Issues
 
-See our [issue tracker](https://github.com/AngelAuraMC/Amethyst-Android/issues) for a list of known issues and their current status.
+See our [issue tracker](https://github.com/Pavle012/Amethyst-Amethyst-Cracked/issues) for a list of known issues and their current status.
 
 ## FAQ
 
@@ -114,7 +112,7 @@ For support, please join our [Discord server](https://discord.gg/5ptqkyZxEy).
 
 ## License
 
-Amethyst is licensed under [GNU LGPLv3](https://github.com/AngelAuraMC/Amethyst-Android/blob/v3_openjdk/LICENSE).
+Amethyst is licensed under [GNU LGPLv3](https://github.com/Pavle012/Amethyst-Amethyst-Cracked/blob/v3_openjdk/LICENSE).
 
 ## Credits & Dependencies
 
@@ -151,4 +149,4 @@ Future plans include:
 * Improving stability and performance.
 * Enhancing the mod installation experience.
 
-We welcome community feedback and suggestions for our roadmap.  Please feel free to open a feature request in our [issue tracker](https://github.com/AngelAuraMC/Amethyst-Android/issues).
+We welcome community feedback and suggestions for our roadmap.  Please feel free to open a feature request in our [issue tracker](https://github.com/Pavle012/Amethyst-Amethyst-Cracked/issues).
