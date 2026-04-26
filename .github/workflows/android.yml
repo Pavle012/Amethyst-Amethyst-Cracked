@@ -76,6 +76,12 @@ jobs:
       - name: Run scripts
         run: |
           ./scripts/languagelist_updater.sh
+          # Patch MobileGL to disable optimization that requires missing SPIRV-Tools
+          if [ -f MobileGL/CMakeLists.txt ]; then
+            sed -i 's/set(ENABLE_OPT                 ON/set(ENABLE_OPT                 OFF/g' MobileGL/CMakeLists.txt
+            sed -i '/SPIRV-Tools-opt/d' MobileGL/CMakeLists.txt
+            sed -i '/SPIRV-Tools/d' MobileGL/CMakeLists.txt
+          fi
           mkdir out
 
       - name: Build Release .apk
