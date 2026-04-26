@@ -717,6 +717,39 @@ public final class Tools {
 
             // Opens the java.net package to Arc DNS injector on Java 9+
             javaArgList.add("--add-opens=java.base/java.net=ALL-UNNAMED");
+            javaArgList.add("--add-opens=java.base/java.io=ALL-UNNAMED");
+            javaArgList.add("--add-opens=java.base/java.lang.invoke=ALL-UNNAMED");
+            javaArgList.add("--add-opens=java.base/java.lang.ref=ALL-UNNAMED");
+            javaArgList.add("--add-opens=java.base/java.lang.reflect=ALL-UNNAMED");
+            javaArgList.add("--add-opens=java.base/java.lang=ALL-UNNAMED");
+            javaArgList.add("--add-opens=java.base/java.net.spi=ALL-UNNAMED");
+            javaArgList.add("--add-opens=java.base/java.net=ALL-UNNAMED");
+            javaArgList.add("--add-opens=java.base/java.nio.channels=ALL-UNNAMED");
+            javaArgList.add("--add-opens=java.base/java.nio.charset=ALL-UNNAMED");
+            javaArgList.add("--add-opens=java.base/java.nio.file=ALL-UNNAMED");
+            javaArgList.add("--add-opens=java.base/java.nio=ALL-UNNAMED");
+            javaArgList.add("--add-opens=java.base/java.text=ALL-UNNAMED");
+            javaArgList.add("--add-opens=java.base/java.time.chrono=ALL-UNNAMED");
+            javaArgList.add("--add-opens=java.base/java.time.format=ALL-UNNAMED");
+            javaArgList.add("--add-opens=java.base/java.time.temporal=ALL-UNNAMED");
+            javaArgList.add("--add-opens=java.base/java.time.zone=ALL-UNNAMED");
+            javaArgList.add("--add-opens=java.base/java.time=ALL-UNNAMED");
+            javaArgList.add("--add-opens=java.base/java.util.concurrent.atomic=ALL-UNNAMED");
+            javaArgList.add("--add-opens=java.base/java.util.concurrent.locks=ALL-UNNAMED");
+            javaArgList.add("--add-opens=java.base/java.util.jar=ALL-UNNAMED");
+            javaArgList.add("--add-opens=java.base/java.util.zip=ALL-UNNAMED");
+            javaArgList.add("--add-opens=java.base/java.util=ALL-UNNAMED");
+            javaArgList.add("--add-opens=java.base/jdk.internal.loader=ALL-UNNAMED");
+            javaArgList.add("--add-opens=java.base/jdk.internal.misc=ALL-UNNAMED");
+            javaArgList.add("--add-opens=java.base/jdk.internal.ref=ALL-UNNAMED");
+            javaArgList.add("--add-opens=java.base/jdk.internal.reflect=ALL-UNNAMED");
+            javaArgList.add("--add-opens=java.base/sun.nio.ch=ALL-UNNAMED");
+            javaArgList.add("--add-opens=java.desktop/com.sun.imageio.plugins.png=ALL-UNNAMED");
+            javaArgList.add("--add-opens=java.desktop/sun.awt.image=ALL-UNNAMED");
+            javaArgList.add("--add-opens=java.desktop/sun.awt=ALL-UNNAMED");
+            javaArgList.add("--add-opens=java.sql.rowset/javax.sql.rowset.serial=ALL-UNNAMED");
+            javaArgList.add("--add-opens=jdk.dynalink/jdk.dynalink.beans=ALL-UNNAMED");
+            javaArgList.add("--add-opens=jdk.naming.dns/com.sun.jndi.dns=ALL-UNNAMED,java.naming");
         }
 
         StringBuilder cacioClasspath = new StringBuilder();
