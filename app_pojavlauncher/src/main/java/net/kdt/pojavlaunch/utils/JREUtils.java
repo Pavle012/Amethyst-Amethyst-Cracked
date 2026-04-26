@@ -174,7 +174,7 @@ public class JREUtils {
         LD_LIBRARY_PATH = ldLibraryPath.toString();
     }
 
-    public static void setJavaEnvironment(Activity activity, String jreHome) throws Throwable {
+    public static void setJavaEnvironment(Activity activity, String jreHome, String graphicsLib) throws Throwable {
         Map<String, String> envMap = new ArrayMap<>();
         envMap.put("POJAV_NATIVEDIR", NATIVE_LIB_DIR);
         envMap.put("JAVA_HOME", jreHome);
@@ -227,6 +227,10 @@ public class JREUtils {
                 envMap.put("MG_DIR_PATH", Tools.DIR_DATA + "/MobileGlues");
                 envMap.put("POJAVEXEC_EGL","libmobileglues.so");
             }
+            if(LOCAL_RENDERER.equals("opengles2")){
+                envMap.put("LIBGL_ES", "2"); // Krypton Wrapper crashes with 1
+                envMap.put("POJAVEXEC_EGL", "libEGL.so");
+            }
             if (LOCAL_RENDERER.equals("opengles3_desktopgl_zink_kopper")){
                 envMap.put("POJAVEXEC_EGL","libEGL_mesa.so"); // Use Mesa EGL
                 if (Tools.shouldUseUBWC()) envMap.put("FD_DEV_FEATURES", "enable_tp_ubwc_flag_hint=1"); // Turnip fix for OneUI rendering issues
@@ -236,7 +240,20 @@ public class JREUtils {
                 envMap.put("MESA_GL_VERSION_OVERRIDE","4.6COMPAT");
                 envMap.put("MESA_GLSL_VERSION_OVERRIDE","460");
             }
+            if (LOCAL_RENDERER.equals("opengles_mobilegl_gles")){
+                envMap.put("MOBILEGL_BACKEND_TYPE", "DirectGLES");
+            }
+            if (LOCAL_RENDERER.equals("opengles_mobilegl_vk")){
+                envMap.put("MOBILEGL_BACKEND_TYPE", "DirectVulkan");
+            }
+            if (LOCAL_RENDERER.startsWith("opengles_mobilegl_")){
+                envMap.put("POJAVEXEC_EGL","libMobileGL.so");
+            }
         }
+
+        envMap.put("SDL_OPENGL_LIBRARY", graphicsLib);
+        envMap.put("SDL_EGL_LIBRARY", NATIVE_LIB_DIR+"/"+envMap.get("POJAVEXEC_EGL"));
+
         if(LauncherPreferences.PREF_BIG_CORE_AFFINITY) envMap.put("POJAV_BIG_CORE_AFFINITY", "1");
         envMap.put("AWTSTUB_WIDTH", Integer.toString(CallbackBridge.windowWidth > 0 ? CallbackBridge.windowWidth : CallbackBridge.physicalWidth));
         envMap.put("AWTSTUB_HEIGHT", Integer.toString(CallbackBridge.windowHeight > 0 ? CallbackBridge.windowHeight : CallbackBridge.physicalHeight));
@@ -297,12 +314,12 @@ public class JREUtils {
     }
     public static void launchJavaVM(final AppCompatActivity activity, final Runtime runtime, File gameDirectory, final List<String> JVMArgs, final String userArgsString) throws Throwable {
         String runtimeHome = MultiRTUtils.getRuntimeHome(runtime.name).getAbsolutePath();
+        final String graphicsLib = loadGraphicsLibrary();
 
         JREUtils.relocateLibPath(runtime, runtimeHome);
 
-        setJavaEnvironment(activity, runtimeHome);
+        setJavaEnvironment(activity, runtimeHome, graphicsLib);
 
-        final String graphicsLib = loadGraphicsLibrary();
         List<String> userArgs = getJavaArgs(activity, runtimeHome, userArgsString);
 
         //Remove arguments that can interfere with the good working of the launcher
@@ -495,6 +512,8 @@ public class JREUtils {
                 renderLibrary = "libng_gl4es.so"; break;
             case "vulkan_zink": renderLibrary = "libOSMesa.so"; break;
             case "opengles_mobileglues": renderLibrary = "libmobileglues.so"; break;
+            case "opengles_mobilegl_vk":
+            case "opengles_mobilegl_gles": renderLibrary = "libMobileGL.so"; break;
             case "opengles3_desktopgl_zink_kopper": renderLibrary = "libglxshim.so"; break;
             case "opengles3_ltw" : renderLibrary = "libltw.so"; break;
             default:
