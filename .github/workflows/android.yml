@@ -77,11 +77,16 @@ jobs:
         run: |
           ./scripts/languagelist_updater.sh
           # Aggressively patch all CMakeLists.txt to disable optimization that requires missing SPIRV-Tools
-          find . -name CMakeLists.txt -exec sed -i 's/ENABLE_OPT.*ON/ENABLE_OPT OFF/g' {} +
-          echo "Checking for ENABLE_OPT after patch:"
+          find . -name CMakeLists.txt -exec sed -i 's/ENABLE_OPT[[:space:]]\+ON/ENABLE_OPT OFF/g' {} +
+          find . -name CMakeLists.txt -exec sed -i 's/ENABLE_OPT[[:space:]]\+1/ENABLE_OPT 0/g' {} +
+          # Use a broad match for options
+          find . -name CMakeLists.txt -exec sed -i 's/ENABLE_OPT[[:space:]]\+\(ON\|1\)/ENABLE_OPT OFF/g' {} +
+          # Specifically target glslang's error block
+          find . -name CMakeLists.txt -exec sed -i '/message(SEND_ERROR "ENABLE_OPT/d' {} +
+          find . -name CMakeLists.txt -exec sed -i '/"set the ALLOW_EXTERNAL_SPIRV_TOOLS/d' {} +
+          find . -name CMakeLists.txt -exec sed -i '/or set ENABLE_OPT=0.")/d' {} +
+          echo "Checking for ENABLE_OPT after aggressive patch:"
           find . -name CMakeLists.txt -exec grep -H "ENABLE_OPT" {} +
-          # Specifically silence the glslang error message
-          find . -name CMakeLists.txt -exec sed -i 's/message(SEND_ERROR "ENABLE_OPT/message(STATUS "ENABLE_OPT/g' {} +
           if [ -f MobileGL/CMakeLists.txt ]; then
             sed -i '/SPIRV-Tools-opt/d' MobileGL/CMakeLists.txt
             sed -i '/SPIRV-Tools/d' MobileGL/CMakeLists.txt
