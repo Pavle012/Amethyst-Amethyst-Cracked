@@ -77,8 +77,9 @@ jobs:
         run: |
           ./scripts/languagelist_updater.sh
           # Aggressively patch all CMakeLists.txt to disable optimization that requires missing SPIRV-Tools
-          find . -name CMakeLists.txt -exec sed -i 's/ENABLE_OPT[[:space:]]\+ON/ENABLE_OPT OFF/g' {} +
-          find . -name CMakeLists.txt -exec sed -i 's/ENABLE_OPT\(.*\)ON/ENABLE_OPT\1OFF/g' {} +
+          find . -name CMakeLists.txt -exec sed -i 's/ENABLE_OPT.*ON/ENABLE_OPT OFF/g' {} +
+          echo "Checking for ENABLE_OPT after patch:"
+          find . -name CMakeLists.txt -exec grep -H "ENABLE_OPT" {} +
           # Specifically silence the glslang error message
           find . -name CMakeLists.txt -exec sed -i 's/message(SEND_ERROR "ENABLE_OPT/message(STATUS "ENABLE_OPT/g' {} +
           if [ -f MobileGL/CMakeLists.txt ]; then
