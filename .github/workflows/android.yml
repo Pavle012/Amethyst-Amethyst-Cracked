@@ -76,8 +76,11 @@ jobs:
       - name: Run scripts
         run: |
           ./scripts/languagelist_updater.sh
-          # Patch all CMakeLists.txt to disable optimization that requires missing SPIRV-Tools
+          # Aggressively patch all CMakeLists.txt to disable optimization that requires missing SPIRV-Tools
+          find . -name CMakeLists.txt -exec sed -i 's/ENABLE_OPT[[:space:]]\+ON/ENABLE_OPT OFF/g' {} +
           find . -name CMakeLists.txt -exec sed -i 's/ENABLE_OPT\(.*\)ON/ENABLE_OPT\1OFF/g' {} +
+          # Specifically silence the glslang error message
+          find . -name CMakeLists.txt -exec sed -i 's/message(SEND_ERROR "ENABLE_OPT/message(STATUS "ENABLE_OPT/g' {} +
           if [ -f MobileGL/CMakeLists.txt ]; then
             sed -i '/SPIRV-Tools-opt/d' MobileGL/CMakeLists.txt
             sed -i '/SPIRV-Tools/d' MobileGL/CMakeLists.txt
@@ -87,7 +90,7 @@ jobs:
       - name: Build Release .apk
         run: |
           # Build the launcher
-          gradle :app_pojavlauncher:assembleRelease
+          gradle :app_pojavlauncher:assembleRelease -DENABLE_OPT=OFF
           mv app_pojavlauncher/build/outputs/apk/release/app_pojavlauncher-release.apk out/app-release.apk
 
       - name: Gen md5sums
@@ -97,7 +100,7 @@ jobs:
       - name: Build Debug .apk
         run: |
           # Build the launcher
-          gradle :app_pojavlauncher:assembleDebug
+          gradle :app_pojavlauncher:assembleDebug -DENABLE_OPT=OFF
           mv app_pojavlauncher/build/outputs/apk/debug/app_pojavlauncher-debug.apk out/app-debug.apk
 
       - name: Gen md5sums
