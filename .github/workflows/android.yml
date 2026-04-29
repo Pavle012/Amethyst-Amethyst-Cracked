@@ -77,9 +77,12 @@ jobs:
         run: |
           ./scripts/languagelist_updater.sh
           # Fix missing SPIRV-Tools headers in MobileGL submodule
-          mkdir -p MobileGL/3rdparty/glslang/External/spirv-tools/external/spirv-headers
-          git clone --depth 1 https://github.com/KhronosGroup/SPIRV-Tools.git MobileGL/3rdparty/glslang/External/spirv-tools
-          git clone --depth 1 https://github.com/KhronosGroup/SPIRV-Headers.git MobileGL/3rdparty/glslang/External/spirv-tools/external/spirv-headers
+          EXT_DIR="MobileGL/3rdparty/glslang/External"
+          mkdir -p "$EXT_DIR"
+          rm -rf "$EXT_DIR/spirv-tools" "$EXT_DIR/spirv-headers"
+          git clone --depth 1 https://github.com/KhronosGroup/SPIRV-Tools.git "$EXT_DIR/spirv-tools"
+          mkdir -p "$EXT_DIR/spirv-tools/external"
+          git clone --depth 1 https://github.com/KhronosGroup/SPIRV-Headers.git "$EXT_DIR/spirv-tools/external/spirv-headers"
           
           # Aggressively patch all CMakeLists.txt to disable optimization that requires building SPIRV-Tools
           find . -name CMakeLists.txt -exec sed -i 's/ENABLE_OPT[[:space:]]\+ON/ENABLE_OPT OFF/g' {} +
